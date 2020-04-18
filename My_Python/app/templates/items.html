@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+{% block content %}
+<button type="button" class="btn btn-outline-info">
+    <a href="/"><em>Назад</em></a>
+{% for product in products %}
+<div class="products" align="left" hspace="0" align="height" >
+    <img  border="1" height="200" width="200" align="left" hspace="0" src="{{ url_for('static', filename=product.img) }}" alt="">
+    <table  align="right" hspace="0">
+        <th>Дата</th>
+        <tr>
+            <td>2020-06-28</td>
+        </tr>
+    </table>
+    <h5>{{ product.name }}</h5>
+    <h6>{{ product.title }}</h6>
+    <em>{{ product.meta_info}}</em>
+    <p>{{ product.price }}</p>
+{% endfor %}
+</div>
+</button>
+<button type="button" class="btn btn-outline-secondary">
+<div class="products" align="right" hspace="0" align="height" >
+    <h4>Արագ առաքում</h4>
+    <h6>Նշեք Ձեր հասցեն՝ ամենաարագ առաքում առաջարկելու համար</h6>
+    <form action="" method="post" novalidate>
+        {{ form.hidden_tag() }}
+        {{ form.task_1.label }}
+        {{ form.task_1(size=30) }}
+        <br><br>
+        {{ form.task_2.label }}
+        {{ form.task_2(size=27) }}
+        <br><br>
+        {{ form.task_3.label }}
+        {{ form.task_3(size=24) }}
+        <br><br>
+        {{ form.submit_1() }}
+    </form>
+</div>
+</button>
+
+<style>
+
+div{
+  right: 20px;
+  border: 4px solid color: black;
+  padding: 4px;
+}
+
+p{
+    width: 650px;
+    height: 10px;
+    text-align: justify;
+}
+</style>
+{% endblock %}

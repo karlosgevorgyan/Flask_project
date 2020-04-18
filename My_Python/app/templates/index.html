@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block content %}
+    <html>
+    <head>
+        <style>
+
+            li {
+                float: left;
+            }
+
+            li a {
+                display: block;
+                text-align: center;
+                padding: 8px;
+                text-decoration: none;
+            }
+
+            h1 {
+                border: 1px solid #03281F;
+                padding-left: 400px;
+            }
+            ul {
+                list-style-type: none;
+                margin: 0;
+                padding: 0;
+                padding-left: 400px;
+            }
+
+            body {
+                width: 1250px;
+                height:800px;
+            }
+
+        </style>
+    </head>
+    <body>
+    <ul style="padding:0px;">
+        {% for category in categories %}
+            {% if category.parent_id == -1 %}
+        <button type="button" class="btn btn-outline-info"><a href="/categories/{{ category.cat_id }}">{{ category.name }}</a></button>
+            {% else %}
+        <button type="button" class="btn btn-outline-info"><li>
+                            {{ category.name }}
+                            <a href="/categories/{{ category.cat_id }}/items">
+                                <img border="5" height="200" src="{{ url_for('static', filename=category.img) }}"width="200" hspace="50"/></a>
+                       </li></button>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% if show %}
+        <h3>
+            <center><em> Սուպեր մարկետ ձեր տանը </em></center>
+        </h3>
+        <div1 class="img">
+            <img border="0" height="300" src="//live.staticflickr.com/7297/27350444620_c17216becc_b.jpg" width="312"/>
+            <img border="0" height="300" src="//live.staticflickr.com/3548/3763574654_4fa63c57d8.jpg" width="312"
+                 align="left" hspace="0"/>
+            <img border="0" height="300" src="//live.staticflickr.com/8180/8047320922_af2e2e34df_b.jpg" width="312"
+                 align="left" hspace="0"/>
+            <img border="0" height="300" src="///live.staticflickr.com/4090/4950303045_973504026f_z.jpg" width="310"
+                 align="left" hspace="0"/>
+            <img height="300" src="//live.staticflickr.com/7526/15688337416_9784bcdd8f_b.jpg" width="312"/>
+            <img height="300" src="//live.staticflickr.com/7159/6446627745_8de190dfcc_b.jpg" width="312" align="left"
+                 hspace="0"/>
+            <img height="300" src="///live.staticflickr.com/5174/5407561782_5a744f09fd_b.jpg" width="312" align="left"
+                 hspace="0"/>
+            <img height="300" src="//live.staticflickr.com/65535/48623461146_97240b4175_z.jpg" width="310" align="left"
+                 hspace="0"/>
+        </div1>
+    {% endif %}
+    </body>
+    </html>
+
+{% endblock %}
+

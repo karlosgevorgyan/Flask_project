@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content
+<div>
+  Microblog:
+  <a href="{{ url_for('index') }}">Home</a>
+  {% if current_user.is_anonymous %}
+  <a href="{{ url_for('login') }}">Login</a>
+  {% else %}
+  <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+  <a href="{{ url_for('logout') }}">Logout</a>
+  {% endif %}
+</div>
+    <h1>User: {{ user.username }}</h1>
+    <hr>
+    {% for post in posts %}
+    <p>
+    {{ post.author.username }} says: <b>{{ post.body }}</b>
+    </p>
+    {% endfor %}
+{% endblock %}

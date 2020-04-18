@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    {% if title %}
+    <title>{{ title }} - Страница</title>
+    {% else %}
+    <title>Welcome home page</title>
+    {% endif %}
+<style >
+    h1{
+        color: #024635;
+    }
+    h3{
+        color: #024635;
+    }
+
+</style>
+<body style="background-color:#FAFBF0;">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<li class="nav-item">
+        <button type="button" class="btn btn-outline-danger">
+            <table align="right" hspace="0" align="height">
+            <th>Բջջային Տարբերակ</th>
+            <tr>
+                <td>+374(010)53-88-88</td>
+            </tr>
+        <th><a href="https://www.skype.com/ru/get-skype/"><em>Skype</em> </a></th>
+        </table></button>
+</li>
+<li class="nav-item ">
+    <button type="button" class="btn btn-outline-info"><a href="{{ url_for('index') }}"><h2 style="font-size:150%;"><em> Главная Страница </em></h2></a></button>
+</li>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+
+  </button>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="/login"><b> Մուտք </b><span class="sr-only">(current)</span></a>
+      </li>
+        <li class="nav-item active">
+        <a class="nav-link" href="{{ url_for('register') }}"><b> Գրանցում </b><span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="https://www.sas.am/about/vacancy/">Աշխատատեղեր</a>
+      </li>
+         <li class="nav-item">
+        <a class="nav-link" href="https://www.sas.am/">sas.am</a>
+      </li>
+    </ul>
+    <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Поиск">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Поиск</button>
+    </form>
+  </div>
+</nav>
+        <hr>
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+        <ul>
+            {% for message in messages %}
+            <li>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        {% endwith %}
+{% block content %}
+    <h1>Hi, {{ current_user.username }}!</h1>
+    {% for post in posts %}
+    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}
+ <div>
+      Microblog:
+      <a href="{{ url_for('index') }}">Home</a>
+      {% if current_user.is_anonymous %}
+      <a href="{{ url_for('login') }}">Login</a>
+      {% else %}
+      <a href="{{ url_for('user', username=current_user.username) }}">Profile</a>
+      <a href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+    </div>
+{% endblock %}
+</body>
+</html>
